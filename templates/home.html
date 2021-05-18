@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+   Block 
+{% endblock title %}
+
+<!-- {% load static %} -->
+<!-- <link rel="stylesheet" href="{% static 'static/css/style.css' %}"> -->
+{% block content %}
+    
+{% include 'form.html' %}
+    <!-- <p class="title">0000000000000000000a863ed562bf18f24e8d7cefb2d4a4dfe4cb2951fcae75</p> -->
+    
+    
+    {% if not block %}
+        <h1>Can't view stuff</h1>
+    {% else %}
+        {% for transaction in transactions %}
+
+            <div class="card" style="width: 50rem; margin-bottom: 2.5vh">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body col">
+                    <h5 class="card-title">{{transaction.hash}}</h5>
+                    <p class="card-text">Value: {{ transaction.out.0.value }} </p>
+                    <div class="center-block">
+                        <a href="#" class="btn btn-primary ">Details</a>
+                    </div>
+                </div>
+            </div>
+    
+        {% endfor %}
+    {% endif %}
+    
+
+
+{% endblock content %}

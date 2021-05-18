@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Blockchain!</title>
+</head>
+<body>
+    
+    
+    <form method="POST" autocomplete="off" >
+        {% csrf_token %}
+
+
+        <!-- <input type="text"> -->
+        <label for="submit-hash">Transaction Hash: </label>
+        
+        {{ form.as_p }}
+        <button type="submit" id="submit-hash">Find</button>
+        
+    </form>
+
+
+
+    {% if correct_hash %}
+        <h1>The hash is correct!</h1>
+
+        <div>
+            <h2>Hash: {{ transaction.hash }}</h2>
+            <h3>Fee: {{ transaction.fee }} sats</h3>
+            <h3>Value: {{ transaction.inputs.0.prev_out.value }}</h3>
+        </div>
+
+
+    {% else %}
+        <h1>Hash invalid</h1>
+    {% endif %}
+
+
+
+</body>
+</html>
