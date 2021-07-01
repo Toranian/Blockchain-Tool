@@ -2,22 +2,21 @@
 {% block form %}
         
     <div class="jumbotron" style="margin-top: 2.5vh;">
-            <h1 class="display-4">Enter a hash</h1>
+            <h1 class="display-4">Enter a hash or block height</h1>
             <form action="." method="POST" autocomplete="off" class="form-group" style="align-items: center;">
                 {% csrf_token %}
                 
                 {{ form.as_p }}
                 
-                {% if correct_hash %}
+                <!-- {% if correct_hash %}
                 <div class="alert alert-success">Hash correct!</div>
                 {% else %}
                 <div class="alert alert-danger">Hash incorrect.</div>
-                {% endif %}
-
-
+                {% endif %} -->
 
                 <button type="submit" id="submit-hash" class="btn btn-primary">Find</button>
                 <button name="latest_hash" class="btn btn-secondary">Get the latest block</button>
+
             </form>
 
         </div>
