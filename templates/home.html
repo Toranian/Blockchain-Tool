@@ -20,10 +20,13 @@
                 <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                 <div class="card-body col">
                     <h5 class="card-title">{{transaction.hash}}</h5>
-                    <p class="card-text">Value: {{ transaction.out.0.value }} </p>
+                    <p class="card-text">Value: {{ transaction.value}} </p>
+                    <p class="card-text">Sender: {{ transaction.sender }}</p>
+                    <p class="card-text">Receiver: {{ transaction.receiver }}</p>
                     <div class="center-block">
                         <a href="#" class="btn btn-primary ">Details</a>
                     </div>
+                    <!-- <p>Hello there</p> -->
                 </div>
             </div>
     
