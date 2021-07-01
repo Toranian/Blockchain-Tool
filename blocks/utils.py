@@ -1,6 +1,6 @@
 import json
 import requests
-import datetime
+from datetime import datetime
 from typing import List
 
 
@@ -31,19 +31,14 @@ class Transaction:
         self.block_height: int = transaction_data['block_height']
         self.input_raw: List[dict] = transaction_data['inputs']
         self.output_raw: List[dict] = transaction_data['out']
+        self.value: int = self.output_raw[0]['value']
 
         try:
             self.sender = self.input_raw[0]['prev_out']['addr']
         except Exception:
             self.sender = "Coinbase"
-            
-        # try:
+
         self.receiver = self.output_raw[0]['addr']
-        # except Exception:
-            
-        # print(self.sender)
-        
-        
 
     def __str__(self) -> str:
         return f"Transaction: {self.block_height}, From: {self.sender} To: {self.receiver}"
@@ -68,7 +63,7 @@ class Block:
         self.prev_block: str = r['prev_block']
         self.mrkl_root: str = r['mrkl_root']
         self.timestamp: int = int(r['time'])
-        # self.time: datetime.datetime = datetime.fromtimestamp(self.timestamp)  # nopep8
+        self.time: datetime.datetime = datetime.fromtimestamp(self.timestamp)
         self.bits: int = r['bits']
         self.fee: int = r['fee']
         self.nonce: int = r['nonce']
@@ -80,31 +75,23 @@ class Block:
         self.weight: int = r['weight']
         self.next_block: str = r['next_block']
         self.transactions_raw: List[str] = r['tx']
-        # self.height: int = 0
 
         self.create_transactions(self.transactions_raw)
 
-    def create_transactions(self, transactions):
+    def create_transactions(self, transactions) -> List[Transaction]:
+        """
+        Generate a list of transaction objects.
+
+        Args:
+            transactions (List[Transaction]): A list of transaction objects.
+        """
+
         self.transactions = []
 
         for tx in transactions:
             self.transactions.append(Transaction(tx))
 
-    def print_transactions(self):
-        for tx in self.transactions:
-            print(tx)
-
-# block_hash = 170
-# obj = requests.get(f"https://blockchain.info/rawblock/{block_hash}").json()
-
-# # print(obj)
-
-# for key in obj.keys():
-
-#     print(f"self.{key} = response{key}")
-
 
 block = Block(170)
-# block.print_transactions()
 for transaction in block.transactions:
     print(transaction)
